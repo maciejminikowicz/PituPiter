@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tweet form</title>
+</head>
+<body>
+<h1>New Tweet of user with id: <span th:text="${userId}"></span> </h1>
+
+<form th:action="@{/tweet/add}" th:method="post"  th:object="${newTweet}">
+    <input type="hidden" name="tweetUserId" th:value="${userId}">
+    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{dateTweetAdded}" >
+
+    <label for="tweet">What do you have to say:</label>
+    <input type="text" maxlength="160" id="tweet" th:field="*{content}" required="required"><br>
+
+    <input type="submit" value="Send a tweet"/>
+
+</form>
+
+</body>
+</html>

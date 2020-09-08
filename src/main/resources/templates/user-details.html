@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+</head>
+<body>
+
+<h1>Here are your details <span th:text="${userDetails.username}"></span></h1>
+
+<br/>
+
+<table>
+    <tr>
+        <td>Username:</td>
+        <td th:text="${userDetails.username}"></td>
+    </tr>
+
+    <tr>
+        <td>Email:</td>
+        <td th:text="${userDetails.email}"></td>
+    </tr>
+    <tr>
+        <td>Account type:</td>
+        <td th:text="${userDetails.userAccountType}"></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{'/user/edit/'+${userDetails.id}}">Edit you details</a>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <a th:href="@{'/user/delete/'+${userDetails.id}}">Delete your account</a>
+        </td>
+    </tr>
+
+</table>
+<br/>
+
+<a th:href="@{/tweet/add(user_Id=${userDetails.id})}">Add new Tweet:</a><br/>
+<br/>
+<h2>Your tweets</h2>
+
+
+<table>
+    <thead>
+    <tr>
+        <td>Id</td>
+        <td>Content</td>
+        <td>Date added</td>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="tweet : ${userDetails.tweetList}">
+        <td th:text="${tweet.id}"></td>
+        <td th:text="${tweet.content}"></td>
+        <td th:text="${tweet.dateTweetAdded}"></td>
+        <td>
+            <a th:href="@{'/tweet/edit/'+${tweet.id}}">Edit tweet</a>
+        </td>
+        <td>
+            <a th:href="@{/tweet/delete(tweetId=${tweet.id})}">Delete</a>
+        </td>
+        <td>
+            <a th:href="@{/tweet/details(tweetId=${tweet.id})}">Details</a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User registration</title>
+</head>
+<body>
+<h1>New user registration</h1>
+
+<form th:action="@{/user/register}" th:method="post" th:object="${newUser}">
+    <input type="hidden" th:field="*{id}">
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" th:field="*{username}" class="form-control" required="required"/><br/>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" th:field="*{email}" class="form-control" required="required"/><br/>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" class="form-control" required="required"/><br/>
+
+    <div>
+        Account type:
+        <select name="userAccountType">
+            <option th:each="userAccountType : ${T(pl.mm.pitupiter.model.UserAccountType).values()}"
+                    th:text="${userAccountType.displayName}" th:value="${userAccountType}"></option>
+        </select>
+    </div>
+
+    <input type="submit" value="Register"/>
+
+
+
+
+</form>
+
+</body>
+</html>
