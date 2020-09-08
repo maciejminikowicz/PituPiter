@@ -1,18 +1,19 @@
 package pl.mm.pitupiter.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table
-public class Tweet {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +22,14 @@ public class Tweet {
     private String content;
 
     @CreationTimestamp
-    private LocalDateTime dateTweetAdded;
+    private LocalDateTime dateCommentAdded;
 
     @ManyToOne
-    private User user;
+    private Tweet tweet;
 
-    @OneToMany
-    private List<Comment> commentList;
+    @ManyToOne
+    private User commentUser;
+
 
 
 }

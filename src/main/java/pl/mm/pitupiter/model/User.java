@@ -28,4 +28,6 @@ public class User {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
     private List<Tweet> tweetList;
 
+    @OneToMany
+    private List<Comment> commentList;
 }
