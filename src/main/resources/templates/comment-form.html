@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Comment Form</title>
+</head>
+<body>
+<h1>New comment of tweet: <span th:text="${tweetContent}"></span></h1>
+<form th:action="@{/comment/add}" th:method="post" th:object="${newComment}">
+    <input type="hidden" name="tweetId" th:value="${tweetId}">
+    <input type="hidden" th:field="*{id}">
+    <input type="hidden" th:field="*{dateCommentAdded}">
+
+    <label for="comment">Your comment:</label>
+    <input type="text" maxlength="160" id="comment" th:field="*{content}" required="required">
+    <input type="submit" value="Add a comment"/>
+
+</form>
+</body>
+</html>

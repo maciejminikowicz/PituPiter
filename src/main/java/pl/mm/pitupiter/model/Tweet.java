@@ -1,6 +1,8 @@
 package pl.mm.pitupiter.model;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -26,7 +28,7 @@ public class Tweet {
     @ManyToOne
     private User user;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "tweet")
     private List<Comment> commentList;
 
 

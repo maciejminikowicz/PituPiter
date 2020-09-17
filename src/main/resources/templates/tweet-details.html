@@ -13,7 +13,38 @@
     <tr>
         <td>Tweet content:</td>
         <td th:text="${tweetDetails.content}"></td>
+
+        <td>
+            <a th:href="@{/comment/add(tweet_id=${tweetDetails.id})}">Add a comment:</a><br/>
+        </td>
+    </tr>
 </table>
+
+<table>
+    <thead>
+    <tr>
+        <td>Id</td>
+        <td>Comment</td>
+        <td>Date added</td>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="comment : ${tweetDetails.commentList}">
+        <td th:text="${comment.id}"></td>
+        <td th:text="${comment.content}"></td>
+        <td th:text="${comment.dateCommentAdded}"></td>
+        <td>
+            <a th:href="@{/comment/delete(commentId=${comment.id})}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<a th:href="@{/user/details(userId=${userId})}">Return</a>
+
+
+
 
 </body>
 </html>

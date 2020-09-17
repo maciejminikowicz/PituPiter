@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.mm.pitupiter.model.Tweet;
-import pl.mm.pitupiter.model.User;
 import pl.mm.pitupiter.repository.UserRepository;
 import pl.mm.pitupiter.service.TweetService;
 import pl.mm.pitupiter.service.UserService;
@@ -31,6 +30,7 @@ public class TweetController {
         model.addAttribute("userId", userId);
         return "tweet-form";
     }
+
     @PostMapping("/add")
     public String addTweet(Tweet tweet, Long tweetUserId) {
         tweetService.createTweet(tweet, tweetUserId);
@@ -52,20 +52,25 @@ public class TweetController {
     }
 
     @GetMapping("/delete")
-    public String deleteTweet(@RequestParam Long tweetId) {
+    public String deleteTweet(@RequestParam Long tweetId, Long userId) {
+        Optional<Tweet> optionalTweet = tweetService.findById(tweetId);
+        if (optionalTweet.isPresent()) {
+            Tweet tweet = optionalTweet.get();
+            userId = tweet.getUser().getId();
+        }
         tweetService.deleteTweet(tweetId);
-        return "redirect:/";
+        return "redirect:/user/details?userId=" + userId;
     }
 
     @GetMapping("/details")
-    public String getTweetDetails(Model model, @RequestParam Long tweetId){
+    public String getTweetDetails(Model model, @RequestParam Long tweetId) {
         Optional<Tweet> optionalTweet = tweetService.findById(tweetId);
-        if (optionalTweet.isPresent()){
+        if (optionalTweet.isPresent()) {
             Tweet tweet = optionalTweet.get();
             model.addAttribute("tweetDetails", tweet);
+            model.addAttribute("userId", tweet.getUser().getId());
             return "tweet-details";
-        }
-        else {
+        } else {
             return "redirect:/";
         }
     }

@@ -25,9 +25,9 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private UserAccountType userAccountType;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "user")
     private List<Tweet> tweetList;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "commentUser")
     private List<Comment> commentList;
 }

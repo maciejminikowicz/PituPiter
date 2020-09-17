@@ -17,11 +17,11 @@ public class UserService {
 //    private PasswordEncoder passwordEncoder;
 
 
-    public Optional<User> findUserById(Long id){
+    public Optional<User> findUserById(Long id) {
         return userRepository.findById(id);
     }
 
-    public void deleteUserById(Long id){
+    public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
 
