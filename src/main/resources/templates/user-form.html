@@ -7,7 +7,7 @@
 <body>
 <h1>New user registration</h1>
 
-<form th:action="@{/user/register}" th:method="post" th:object="${newUser}">
+<form th:action="@{/register}" th:method="post" th:object="${newUser}">
     <input type="hidden" th:field="*{id}">
 
     <label for="username">Username:</label>

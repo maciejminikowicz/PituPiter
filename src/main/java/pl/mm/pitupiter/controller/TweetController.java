@@ -1,14 +1,11 @@
 package pl.mm.pitupiter.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.mm.pitupiter.model.Tweet;
-import pl.mm.pitupiter.repository.UserRepository;
 import pl.mm.pitupiter.service.TweetService;
-import pl.mm.pitupiter.service.UserService;
 
 import java.util.Optional;
 
@@ -19,10 +16,6 @@ public class TweetController {
 
     private final TweetService tweetService;
 
-    private final UserService userService;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @GetMapping("/add")
     public String tweetAddForm(Model model, @RequestParam("user_Id") Long userId) {

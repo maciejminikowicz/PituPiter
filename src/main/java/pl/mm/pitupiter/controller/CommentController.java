@@ -20,13 +20,13 @@ import java.util.Optional;
 public class CommentController {
 
     @Autowired
-    CommentService commentService;
+    private CommentService commentService;
 
     @Autowired
-    TweetService tweetService;
+    private TweetService tweetService;
 
     @Autowired
-    CommentRepository commentRepository;
+    private CommentRepository commentRepository;
 
 
     @GetMapping("/add")
