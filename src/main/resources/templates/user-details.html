@@ -2,43 +2,43 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
     <title>User Details</title>
 </head>
 <body>
 
-<h1>Here are your details <span th:text="${userDetails.username}"></span></h1>
+<h1>Here are your details <span th:text="${name}"></span></h1>
 
 <br/>
 
 <table>
     <tr>
         <td>Username:</td>
-        <td th:text="${userDetails.username}"></td>
+        <td th:text="${name}"></td>
     </tr>
 
     <tr>
         <td>Email:</td>
-        <td th:text="${userDetails.email}"></td>
+        <td th:text="${email}"></td>
     </tr>
     <tr>
         <td>Account type:</td>
-        <td th:text="${userDetails.userAccountType}"></td>
+        <td th:text="${accountType}"></td>
     </tr>
     <tr>
-        <td><a th:href="@{'/user/edit/'+${userDetails.id}}">Edit you details</a>
+        <td><a th:href="@{/user/edit}">Edit you details</a>
         </td>
     </tr>
 
     <tr>
         <td>
-            <a th:href="@{'/user/delete/'+${userDetails.id}}">Delete your account</a>
+            <a th:href="@{/user/delete}">Delete your account</a>
         </td>
     </tr>
 
 </table>
 <br/>
 
-<a th:href="@{/tweet/add(user_Id=${userDetails.id})}">Add new Tweet:</a><br/>
 <br/>
 <h2>Your tweets</h2>
 

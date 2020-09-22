@@ -27,7 +27,7 @@ public class TweetController {
     @PostMapping("/add")
     public String addTweet(Tweet tweet, Long tweetUserId) {
         tweetService.createTweet(tweet, tweetUserId);
-        return "redirect:/user/details?userId=" + tweetUserId;
+        return "redirect:/user/details";
     }
 
     //TODO: GOTOWE

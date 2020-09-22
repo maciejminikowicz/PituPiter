@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.context.annotation.DependsOn;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,6 +21,7 @@ public class Comment {
     private Long id;
 
     private String content;
+    
 
     @CreationTimestamp
     private LocalDateTime dateCommentAdded;

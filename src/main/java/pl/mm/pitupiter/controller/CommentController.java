@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.mm.pitupiter.model.Comment;
 import pl.mm.pitupiter.model.Tweet;
-import pl.mm.pitupiter.repository.CommentRepository;
 import pl.mm.pitupiter.service.CommentService;
 import pl.mm.pitupiter.service.TweetService;
 
@@ -24,10 +23,6 @@ public class CommentController {
 
     @Autowired
     private TweetService tweetService;
-
-    @Autowired
-    private CommentRepository commentRepository;
-
 
     @GetMapping("/add")
     public String getCommentForm(Model model, @RequestParam("tweet_id") Long tweetId) {

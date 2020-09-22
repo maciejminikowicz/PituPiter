@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <link th:href="@{/css/style.css}" rel="stylesheet">
-    <title>User registration</title>
+    <title>User Edit Form</title>
 </head>
 <body>
-<h1>New user registration</h1>
+<h1>Edit your details</h1>
 
-<form th:action="@{/register}" th:method="post" th:object="${newUser}">
+<form th:action="@{/user/edit}" th:method="post" th:object="${editedUser}">
     <input type="hidden" th:field="*{id}">
 
     <label for="username">Username:</label>
@@ -28,9 +28,7 @@
         </select>
     </div>
 
-    <input type="submit" value="Register"/>
-
-
+    <input type="submit" value="Submit changes"/>
 
 
 </form>

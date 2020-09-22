@@ -1,0 +1,33 @@
+h1{
+    font-size: 3em;
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    background-color: #6dffd4;
+}
+
+h2 {
+    font-size: 2em;
+    font-family: 'Lato', sans-serif;
+    background-color: #d5ffe8;
+}
+
+strong {
+    font-weight: 700;
+}
+
+a {
+    font-family: 'Lato', sans-serif;
+}
+
+table {
+    font-family: 'Lato', sans-serif;
+}
+
+form {
+    font-family: 'Lato', sans-serif;
+}
+
+input {
+    font-family: 'Lato', sans-serif;
+
+}

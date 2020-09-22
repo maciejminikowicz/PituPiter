@@ -11,5 +11,6 @@ public class ViewController implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/account_deleted").setViewName("account-deleted");
+        registry.addViewController("/account_edited").setViewName("account-edited");
     }
 }

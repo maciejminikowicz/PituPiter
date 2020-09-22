@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <title>Home</title>
+</head>
+<body>
+<h1>Hello <span th:text="${name}"></span></h1>
+
+<table>
+    <tr>
+        <td>
+            <a th:href="@{/tweet/add(user_Id=${id})}">Add new Tweet:</a><br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a th:href="@{/user/details}">Your details</a><br/>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a th:href="@{/logout}">Log out</a>
+        </td>
+    </tr>
+
+
+
+</table>
+
+
+
+
+</body>
+</html>
