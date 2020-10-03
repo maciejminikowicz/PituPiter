@@ -1,0 +1,133 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Kumbh Sans', sans-serif;
+    background: url("/images/logo2.png") no-repeat, rgba(20,31,63,0.88);
+    background-size: 100px;
+    background-position-x: center;
+    background-position-y: top;
+}
+
+img{
+    position: center;
+    justify-content: center;
+    display: flex;
+    color: white;
+}
+
+
+.register-box{
+    width: 280px;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #e90052;
+}
+
+.register-box h1{
+    display: flex;
+    justify-content: center;
+    float: left;
+    width: 100%;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.textbox {
+    width: 100%;
+    overflow: hidden;
+    font-size: 20px;
+    padding: 8px 0;
+    margin: 8px 0;
+    border-bottom: 1px solid white;
+}
+
+.textbox i{
+    width: 26px;
+    height: 36px;
+    text-align: center;
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;
+}
+
+.textbox input{
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+    font-size: 16px;
+    width: 80%;
+    float: left;
+    margin: 10px;
+}
+
+
+
+.custom-select{
+    width: 100%;
+    background-color: rgba(20,31,63,0.88);
+    /*border: 2px solid white;*/
+    color: white;
+    padding: 5px;
+    font-size: 16px;
+    margin: 12px 0;
+}
+
+.custom-select:hover{
+    cursor: pointer;
+    border-color: #e90052;
+}
+
+.sbmt{
+    width: 100%;
+    background: none;
+    border: 2px solid white;
+    color: white;
+    padding: 5px;
+    font-size: 18px;
+    margin: 12px 0;
+    transition: 0.3s;
+}
+
+.sbmt:hover{
+    cursor: pointer;
+    border-color: #e90052;
+    color: #e90052;
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+}
+
+.column1 {
+    width: 23%;
+    float: left;
+    height: 100%;
+    background: white;
+}
+.column2 {
+    width: 50%;
+    margin-left: 2%;
+    margin-right: 2%;
+    float: left;
+    align-content: center;
+    height: auto;
+}
+.column3 {
+    width: 23%;
+    float: right;
+    height: 100%;
+    background-color: white;
+}
+
+::placeholder{
+    color: #f9959c;
+    opacity: 1;
+}
+
+

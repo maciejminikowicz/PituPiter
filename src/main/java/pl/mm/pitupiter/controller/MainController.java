@@ -5,26 +5,32 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import pl.mm.pitupiter.model.User;
+import pl.mm.pitupiter.service.TweetService;
 import pl.mm.pitupiter.service.UserService;
 
 @Controller
-@RequestMapping("/register")
-public class UserRegisterController {
+public class MainController {
+
+    @Autowired
+    private TweetService tweetService;
 
     @Autowired
     private UserService userService;
 
-    @GetMapping
-    public String getRegisterUserForm(Model model) {
-        model.addAttribute("newUser", new User());
-        return "user-form";
-    }
 
-    @PostMapping
+    @GetMapping("/")
+    public String tweetList(Model model){
+        model.addAttribute("allTweets", tweetService.getAllTweets());
+        model.addAttribute("newUser", new User());
+        return "home";
+    }
+    @PostMapping("/")
     public String registerUser(User user) {
         userService.registerUser(user);
-        return "redirect:/login";
+        return "redirect:/";
     }
+
+
 }
+

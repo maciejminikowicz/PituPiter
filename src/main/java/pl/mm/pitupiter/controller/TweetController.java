@@ -1,6 +1,8 @@
 package pl.mm.pitupiter.controller;
 
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +14,11 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/tweet")
 @AllArgsConstructor
+@NoArgsConstructor
 public class TweetController {
 
-    private final TweetService tweetService;
+    @Autowired
+    private TweetService tweetService;
 
 
     @GetMapping("/add")
@@ -27,10 +31,9 @@ public class TweetController {
     @PostMapping("/add")
     public String addTweet(Tweet tweet, Long tweetUserId) {
         tweetService.createTweet(tweet, tweetUserId);
-        return "redirect:/user/details";
+        return "redirect:/user/home";
     }
-
-    //TODO: GOTOWE
+// ZAKOMENTOWALEM BO MODEL.ADDATTRIBUTE NEW TWEET BYL POWIAZYWANY ZAMIAST TEGO Z /ADD
     @GetMapping("/edit/{tweetId}")
     public String editTweet(Model model, @PathVariable Long tweetId) {
         Optional<Tweet> optionalTweet = tweetService.findById(tweetId);
@@ -67,6 +70,13 @@ public class TweetController {
             return "redirect:/";
         }
     }
+
+//    @GetMapping("/list")
+//    public String tweetList(Model model){
+//        model.addAttribute("allTweets", tweetService.getAllTweets());
+//        return "home";
+//    }
+
 
 
 }

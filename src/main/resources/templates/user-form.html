@@ -2,38 +2,48 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
     <title>User registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@700&family=Lato:wght@900&family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6a8a15345c.js" crossorigin="anonymous"></script>
+    <link th:href="@{/css/register.css}" rel="stylesheet">
 </head>
 <body>
-<h1>New user registration</h1>
-
-<form th:action="@{/register}" th:method="post" th:object="${newUser}">
-    <input type="hidden" th:field="*{id}">
-
-    <label for="username">Username:</label>
-    <input type="text" id="username" th:field="*{username}" class="form-control" required="required"/><br/>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" th:field="*{email}" class="form-control" required="required"/><br/>
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" class="form-control" required="required"/><br/>
-
-    <div>
-        Account type:
-        <select name="userAccountType">
-            <option th:each="userAccountType : ${T(pl.mm.pitupiter.model.UserAccountType).values()}"
-                    th:text="${userAccountType.displayName}" th:value="${userAccountType}"></option>
-        </select>
+    <div class="wrapper">
+        <div class="column1"></div>
+        <div class="column2">
+            <div class="register-box">
+                <h1>Join PituPiter</h1>
+                <form th:action="@{/register}" th:method="post" th:object="${newUser}">
+                    <input type="hidden" th:field="*{id}">
+                    <div class="textbox">
+                        <i class="fas fa-user"></i>
+                            <input type="text" id="username" placeholder="Username" th:field="*{username}" class="form-control" required="required"/><br/>
+                    </div>
+                    <div class="textbox">
+                        <i class="fas fa-at"></i>
+                        <input type="email" id="email" placeholder="Email" th:field="*{email}" class="form-control" required="required"/><br/>
+                    </div>
+                    <div class="textbox">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" placeholder="Password" th:field="*{password}" name="password" class="form-control" required="required"/><br/>
+                    </div>
+                    <div>
+                        <div class="textbox">
+                        <select class="custom-select" name="userAccountType">
+                                    <option value="0">Select account type:</option>
+                                    <option th:each="userAccountType : ${T(pl.mm.pitupiter.model.UserAccountType).values()}"
+                                            th:text="${userAccountType.displayName}" th:value="${userAccountType}">
+                                    </option>
+                        </select>
+                        </div>
+                    </div>
+                    <input class="sbmt" type="submit" value="Register"/>
+                </form>
+            </div>
+        </div>
+        <div class="column3"></div>
     </div>
-
-    <input type="submit" value="Register"/>
-
-
-
-
-</form>
 
 </body>
 </html>

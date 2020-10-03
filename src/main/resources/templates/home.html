@@ -1,17 +1,110 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
-    <title>HomePage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@700&family=Lato:wght@900&family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <link th:href="@{/css/layout.css}" rel="stylesheet">
+    <link th:href="@{/css/responsive.css}" rel="stylesheet">
+    <link th:href="@{/css/navbar.css}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6a8a15345c.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>
-    Welcome to PituPiter
-</h1>
 
-<div th:replace="fragments:: navigator "></div>
+<div th:if="${param.error}">
+    Invalid username or password. Please try again.
+</div>
+
+    <div class="wrapper">
+        <div class="navbar" id="main-navbar">
+                <div class="navbar-col1">
+                        <a class="navbar-button-left" style="text-decoration-line: none" th:href="@{/}">Home</a>
+                </div>
+                <div class="navbar-col2">
+                    <div class="logo">
+                        <span class="logo-icon"></span>
+                    </div>
+                </div>
+                <div class="navbar-col3">
+                    <input type="checkbox" id="showReg">
+                        <label for="showReg" class="navbar-button-login">Sign Up</label>
+                            <div class="container2">
+                                <label for="showReg" class="close-btn fas fa-times"></label>
+                                <div class="text" >Please sign up</div>
+                                <form th:action="@{/}" th:method="post" th:object="${newUser}">
+                                <input type="hidden" th:field="*{id}">
+                                    <div class="data">
+                                        <label>Username</label>
+                                        <input type="text" id="regusername" th:field="*{username}" class="form-control" required="required"/><br/>
+                                    </div>
+                                    <div class="data">
+                                        <label>Email</label>
+                                        <input type="email" id="regemail"  th:field="*{email}" class="form-control" required="required"/><br/>
+                                    </div>
+                                    <div class="data">
+                                        <label>Password</label>
+                                        <input type="password" id="regpassword" th:field="*{password}" name="password" class="form-control" required="required"/><br/>
+                                    </div>
+                                    <div class="data">
+                                        <label>Account type</label>
+                                        <select id="accountType" class="form-control" name="userAccountType">
+                                            <option th:each="userAccountType : ${T(pl.mm.pitupiter.model.UserAccountType).values()}"
+                                                    th:text="${userAccountType.displayName}" th:value="${userAccountType}">
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="btn">
+                                        <div class="inner"></div>
+                                        <button type="submit">Register</button>
+                                    </div>
+                                </form>
+                            </div>
+<!--                        <a class="navbar-button-right" style="text-decoration-line: none" th:href="@{/register}">Sign up</a>-->
+                    <input type="checkbox" id="show">
+                        <label for="show" class="navbar-button-login">Log in</label>
+                            <div class="container">
+                                <label for="show" class="close-btn fas fa-times"></label>
+                                <div class="text" >Please sign in</div>
+                                <form method="POST" th:action="@{/login}" id="loginForm">
+                                    <div class="data">
+                                        <label>Username</label>
+                                        <input type="text" name="username" required>
+                                    </div>
+                                    <div class="data">
+                                        <label>Password</label>
+                                        <input type="password" name="password" required>
+                                    </div>
+                                    <div class="btn">
+                                        <div class="inner"></div>
+                                        <button type="submit">Login</button>
+                                    </div>
+                                </form>
+                            </div>
+                </div>
+        </div>
+        <div class="mainbody" id="mainbody">
+            <div class="col1"></div>
+            <div class="col2">
+
+                        
+                    <ul  th:each="tweet : ${allTweets}">
+                        <li class="col2-border">
+                            <a class="col2-user" style="text-decoration-line: blink" th:href="@{/user/details(username=${tweet.user.username})}" th:text="'@'+${tweet.user.username}">
+                            </a>
+                            <div class="col2-content" th:text="${tweet.content}"></div>
+                            <div class="col2-content-date" th:text="${#temporals.format(tweet.dateTweetAdded, 'dd-MM-yyyy HH:mm')}"></div>
+                        </li>
+                    </ul>
+
+            </div>
+            <div class="col3"></div>
+        </div>
+    </div>
+
+
+
 
 </body>
 </html>

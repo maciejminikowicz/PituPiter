@@ -7,7 +7,10 @@ import pl.mm.pitupiter.model.User;
 import pl.mm.pitupiter.repository.TweetRepository;
 import pl.mm.pitupiter.repository.UserRepository;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TweetService {
@@ -34,6 +37,12 @@ public class TweetService {
 
     public void deleteTweet(Long tweetId) {
         tweetRepository.deleteById(tweetId);
+    }
+
+    public List<Tweet> getAllTweets(){
+        return tweetRepository.findAll().stream()
+                .sorted(Comparator.comparing(Tweet::getDateTweetAdded).reversed())
+                .collect(Collectors.toList());
     }
 
 

@@ -2,32 +2,52 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@700&family=Lato:wght@900&family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <link th:href="@{/css/layout.css}" rel="stylesheet">
+    <link th:href="@{/css/responsive.css}" rel="stylesheet">
+    <link th:href="@{/css/navbar.css}" rel="stylesheet">
+
 </head>
 <body>
-<h1>Hello <span th:text="${name}"></span></h1>
 
-<table>
-    <tr>
-        <td>
-            <a th:href="@{/tweet/add(user_Id=${id})}">Add new Tweet:</a><br/>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a th:href="@{/user/details}">Your details</a><br/>
-        </td>
-    </tr>
-    <tr>
-        <td>
-            <a th:href="@{/logout}">Log out</a>
-        </td>
-    </tr>
+<div class="wrapper">
+    <div class="navbar" id="main-navbar">
+        <div class="navbar-col1">
+            <a class="navbar-button-left" style="text-decoration-line: none" th:href="@{/user/home}">Home</a>
+            <a class="navbar-button-left" style="text-decoration-line: none" th:href="@{/tweet/add(user_Id=${id})}">Add post</a><br/>
 
+        </div>
+        <div class="navbar-col2">
+            <div class="logo">
+                <span class="logo-icon"></span>
+            </div>
+        </div>
 
+        <div class="navbar-col3">
+            <a class="navbar-button-right" style="text-decoration-line: none" th:href="@{/logout}">Log out</a>
+            <a class="navbar-button-right" style="text-decoration-line: none" th:href="@{/user}">Details</a>
+        </div>
+    </div>
+    <div class="mainbody" id="mainbody">
+        <div class="col1"></div>
+        <div class="col2">
 
-</table>
+            <ul  th:each="tweet : ${allTweets}">
+                <li class="col2-border">
+                    <a class="col2-user" style="text-decoration-line: blink" th:href="@{/user/details(username=${tweet.user.username})}" th:text="'@'+${tweet.user.username}">
+                    </a>
+                    <div class="col2-content" th:text="${tweet.content}"></div>
+                    <div class="col2-content-date" th:text="${#temporals.format(tweet.dateTweetAdded, 'dd-MM-yyyy HH:mm')}"></div>
+                </li>
+            </ul>
+
+        </div>
+        <div class="col3"></div>
+    </div>
+</div>
 
 
 

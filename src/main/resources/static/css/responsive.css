@@ -1,0 +1,16 @@
+@media only screen and (max-width:600px){
+    .layout {
+        flex-direction: row;
+    }
+
+    .navbar{
+        flex-direction: row;
+    }
+
+
+}
+
+
+
+
+

@@ -4,7 +4,7 @@ public enum UserAccountType {
     PRIVATE("private"),
     PUBLIC("public");
 
-    private String displayName;
+    private final String displayName;
 
     UserAccountType(String displayName) {
         this.displayName = displayName;

@@ -1,17 +1,18 @@
 package pl.mm.pitupiter.controller;
 
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import pl.mm.pitupiter.model.Tweet;
 import pl.mm.pitupiter.model.User;
+import pl.mm.pitupiter.service.TweetService;
 import pl.mm.pitupiter.service.UserService;
 
 import java.security.Principal;
+import java.util.Comparator;
 import java.util.Optional;
 
 @Controller
@@ -20,6 +21,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TweetService tweetService;
 
     //OLD
 //    @GetMapping("/edit/{userId}")
@@ -64,10 +68,20 @@ public class UserController {
         return "redirect:/account_deleted";
     }
 
-    @GetMapping("/details")
+    @GetMapping()
     public String getUserDetails(Model model) {
         getLoggedInUser(model);
         return "user-details";
+    }
+
+    @GetMapping("/details")
+    public String getPublicUserDetails(Model model, @RequestParam String username){
+        Optional<User> optionalUser = userService.findUserByUsername(username);
+        if (optionalUser.isPresent()){
+            User user = optionalUser.get();
+            model.addAttribute("userDetails", user);
+        }
+        return "public-user";
     }
 
     private User getLoggedInUser(Model model) {
@@ -88,6 +102,7 @@ public class UserController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("name", principal.getName());
         model.addAttribute("id", user.getId());
+        model.addAttribute("allTweets", tweetService.getAllTweets());
         return "home-user";
     }
 
