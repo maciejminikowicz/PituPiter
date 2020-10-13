@@ -32,15 +32,23 @@
         </div>
     </div>
     <div class="mainbody" id="mainbody">
-        <div class="col1"></div>
+        <div class="col1">
+            <form th:action="@{/user/users}" class="form-inline">
+                <input type="text" placeholder="keyword" class="form-control" name="username">
+                <input type="submit" value="Search">
+            </form>
+
+        </div>
         <div class="col2">
 
             <ul  th:each="tweet : ${allTweets}">
                 <li class="col2-border">
-                    <a class="col2-user" style="text-decoration-line: blink" th:href="@{/user/details(username=${tweet.user.username})}" th:text="'@'+${tweet.user.username}">
+                    <a class="col2-user" style="text-decoration-line: none" th:href="@{/user/details(username=${tweet.user.username})}" th:text="'@'+${tweet.user.username}">
                     </a>
                     <div class="col2-content" th:text="${tweet.content}"></div>
-                    <div class="col2-content-date" th:text="${#temporals.format(tweet.dateTweetAdded, 'dd-MM-yyyy HH:mm')}"></div>
+                    <a class="col2-content-date" th:text="${#temporals.format(tweet.dateTweetAdded, 'dd-MM-yyyy HH:mm')}"></a>
+                    <i class="far fa-comment"></i><a class="col2-content-date" th:href="@{/comment/add(tweet_id=${tweet.id})}">Comment</a>
+                    <i class="far fa-question-circle"></i><a class="col2-content-date" th:href="@{/comment/list(tweetId=${tweet.id})}">Comments</a>
                 </li>
             </ul>
 
@@ -48,6 +56,8 @@
         <div class="col3"></div>
     </div>
 </div>
+
+
 
 
 

@@ -24,7 +24,7 @@ public class TweetController {
     @GetMapping("/add")
     public String tweetAddForm(Model model, @RequestParam("user_Id") Long userId) {
         model.addAttribute("newTweet", new Tweet());
-        model.addAttribute("userId", userId);
+        model.addAttribute("user_Id", userId);
         return "tweet-form";
     }
 
@@ -33,7 +33,7 @@ public class TweetController {
         tweetService.createTweet(tweet, tweetUserId);
         return "redirect:/user/home";
     }
-// ZAKOMENTOWALEM BO MODEL.ADDATTRIBUTE NEW TWEET BYL POWIAZYWANY ZAMIAST TEGO Z /ADD
+
     @GetMapping("/edit/{tweetId}")
     public String editTweet(Model model, @PathVariable Long tweetId) {
         Optional<Tweet> optionalTweet = tweetService.findById(tweetId);
@@ -48,14 +48,13 @@ public class TweetController {
     }
 
     @GetMapping("/delete")
-    public String deleteTweet(@RequestParam Long tweetId, Long userId) {
+    public String deleteTweet(@RequestParam Long tweetId) {
         Optional<Tweet> optionalTweet = tweetService.findById(tweetId);
         if (optionalTweet.isPresent()) {
             Tweet tweet = optionalTweet.get();
-            userId = tweet.getUser().getId();
+            tweetService.deleteTweet(tweet.getId());
         }
-        tweetService.deleteTweet(tweetId);
-        return "redirect:/user/details?userId=" + userId;
+        return "redirect:/user/home";
     }
 
     @GetMapping("/details")
@@ -76,6 +75,8 @@ public class TweetController {
 //        model.addAttribute("allTweets", tweetService.getAllTweets());
 //        return "home";
 //    }
+
+
 
 
 

@@ -1,18 +1,15 @@
 package pl.mm.pitupiter.controller;
 
-import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.mm.pitupiter.model.Tweet;
 import pl.mm.pitupiter.model.User;
 import pl.mm.pitupiter.service.TweetService;
 import pl.mm.pitupiter.service.UserService;
 
 import java.security.Principal;
-import java.util.Comparator;
 import java.util.Optional;
 
 @Controller
@@ -76,13 +73,19 @@ public class UserController {
 
     @GetMapping("/details")
     public String getPublicUserDetails(Model model, @RequestParam String username){
+        User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Optional<User> optionalUser = userService.findUserByUsername(username);
         if (optionalUser.isPresent()){
             User user = optionalUser.get();
             model.addAttribute("userDetails", user);
+            model.addAttribute("id", user.getId());
+            model.addAttribute("loggedInUserId", loggedInUser.getId());
+            model.addAttribute("userTweets", tweetService.getUserTweets(user));
         }
         return "public-user";
     }
+
+
 
     private User getLoggedInUser(Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -93,6 +96,11 @@ public class UserController {
         model.addAttribute("role", user.getRole());
         model.addAttribute("authorities", user.getAuthorities());
         model.addAttribute("userDetails", user);
+        Optional<User> optionalUser = userService.findUserById(user.getId());
+        if (optionalUser.isPresent()){
+            User user2 = optionalUser.get();
+            model.addAttribute("userTweets", tweetService.getUserTweets(user2));
+        }
         return user;
     }
 
@@ -105,6 +113,13 @@ public class UserController {
         model.addAttribute("allTweets", tweetService.getAllTweets());
         return "home-user";
     }
+
+    @GetMapping("/users")
+    public String getUsers(Model model, @RequestParam String username){
+        model.addAttribute("users", userService.findByName(username));
+        return "search-results";
+    }
+
 
 
 }

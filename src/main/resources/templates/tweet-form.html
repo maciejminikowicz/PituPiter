@@ -7,7 +7,7 @@
 <body>
 <!--Przeniesione do home-user.html-->
 <form th:action="@{/tweet/add}" th:method="post"  th:object="${newTweet}">
-    <input type="hidden" name="tweetUserId" th:value="${userId}">
+    <input type="hidden" name="tweetUserId" th:value="${user_Id}">
     <input type="hidden" th:field="*{id}">
     <input type="hidden" th:field="*{dateTweetAdded}" >
 

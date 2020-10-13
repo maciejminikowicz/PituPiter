@@ -18,11 +18,23 @@ ul {
 .col2-border {
     border: 1px solid #ededed;
     transition: 0.2s;
+    padding: 12px;
 }
 
 .col2-border:hover{
     background-color: #f7f9f9;
 }
+
+.text-public-profile{
+    padding: 10px;
+    border: 1px solid #ededed;
+    margin-bottom: 5px;
+}
+
+.text-public-profile:hover{
+    background-color: #f7f9f9;
+}
+
 
 
 
@@ -35,9 +47,28 @@ ul {
 
 .col1 {
     width: 23%;
+    padding: 10px;
     float: left;
     height: 300px;
 }
+
+.col1-user-details{
+    width: 23%;
+    padding: 10px;
+    float: left;
+    height: auto;
+    margin-top: 15px;
+    border: 1px solid #ededed;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
+    color: black;
+}
+.col1-user-details a{
+    color: black;
+}
+.col1-user-details a:hover{
+    color: #e90052;
+}
+
 .col2 {
     width: 50%;
     margin-left: 2%;
@@ -47,26 +78,39 @@ ul {
     height: auto;
 }
 
+
 .col2-content{
     width: 96%;
     height: 70%;
-    margin-left: 2%;
-    margin-right: 2%;
-    margin-bottom: 2%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-    font-size: small;
+    font-size: 15px;
     text-align: justify;
+    padding-top: 2%;
+    padding-left: 1%;
+    padding-bottom: 2%;
 }
 .col2-content-date{
     width: 96%;
     height: 70%;
-    margin-left: 2%;
-    margin-right: 2%;
-    margin-bottom: 2%;
+    margin-left: 1%;
+    margin-right: 7%;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-    font-size: x-small;
+    font-size: 11px;
     text-align: justify;
+    color: #43277c;
 }
+.far{
+    color: #43277c;
+}
+.fas{
+    color: #43277c;
+}
+
+
+.col2-content-date:hover{
+    color: #e90052;
+}
+
 
 
 
@@ -75,9 +119,7 @@ ul {
     width: 50%;
     height: 10%;
     font-size: small;
-    margin-left: 10px;
-    margin-top: 2%;
-    margin-bottom: 1%;
+    margin-left: 1%;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
@@ -88,13 +130,12 @@ ul {
     color: #e90052;
 }
 
-
-
 .col3 {
     width: 23%;
     float: right;
     height: 300px;
 }
+
 
 
 

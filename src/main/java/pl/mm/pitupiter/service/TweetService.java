@@ -1,7 +1,9 @@
 package pl.mm.pitupiter.service;
 
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.mm.pitupiter.model.Comment;
 import pl.mm.pitupiter.model.Tweet;
 import pl.mm.pitupiter.model.User;
 import pl.mm.pitupiter.repository.TweetRepository;
@@ -44,6 +46,14 @@ public class TweetService {
                 .sorted(Comparator.comparing(Tweet::getDateTweetAdded).reversed())
                 .collect(Collectors.toList());
     }
+
+    public List<Tweet> getUserTweets(User user){
+        return tweetRepository.findAll().stream()
+                .filter(tweet -> tweet.getUser().equals(user))
+                .sorted(Comparator.comparing(Tweet::getDateTweetAdded).reversed())
+                .collect(Collectors.toList());
+    }
+
 
 
 }

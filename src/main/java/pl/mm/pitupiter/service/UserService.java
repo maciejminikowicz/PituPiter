@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import pl.mm.pitupiter.model.User;
 import pl.mm.pitupiter.repository.UserRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -48,5 +49,10 @@ public class UserService implements UserDetailsService {
 
     public Optional<User> findUserByUsername(String username){
         return userRepository.findByUsername(username);
+    }
+
+
+    public List<User> findByName(String username) {
+        return userRepository.findByUsernameLike("%"+username+"%");
     }
 }

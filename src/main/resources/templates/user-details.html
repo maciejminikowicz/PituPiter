@@ -2,76 +2,89 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@700&family=Lato:wght@900&family=Roboto:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet">
+    <link th:href="@{/css/layout.css}" rel="stylesheet">
+    <link th:href="@{/css/responsive.css}" rel="stylesheet">
+    <link th:href="@{/css/navbar.css}" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6a8a15345c.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
 
-<h1>Here are your details <span th:text="${name}"></span></h1>
+<div class="wrapper">
+    <div class="navbar" id="main-navbar">
+        <div class="navbar-col1">
+            <a class="navbar-button-left" style="text-decoration-line: none" th:href="@{/user/home}">Home</a>
+            <a class="navbar-button-left" style="text-decoration-line: none" th:href="@{/tweet/add(user_Id=${id})}">Add post</a><br/>
 
-<br/>
+        </div>
+        <div class="navbar-col2">
+            <div class="logo">
+                <span class="logo-icon"></span>
+            </div>
+        </div>
 
-<table>
-    <tr>
-        <td>Username:</td>
-        <td th:text="${name}"></td>
-    </tr>
+        <div class="navbar-col3">
+            <a class="navbar-button-right" style="text-decoration-line: none" th:href="@{/logout}">Log out</a>
+            <a class="navbar-button-right" style="text-decoration-line: none" th:href="@{/user}">Details</a>
+        </div>
+    </div>
 
-    <tr>
-        <td>Email:</td>
-        <td th:text="${email}"></td>
-    </tr>
-    <tr>
-        <td>Account type:</td>
-        <td th:text="${accountType}"></td>
-    </tr>
-    <tr>
-        <td><a th:href="@{/user/edit}">Edit you details</a>
-        </td>
-    </tr>
+    <div class="mainbody" id="mainbody">
+        <div class="col1-user-details">
+            Your details:
+            <table>
+                <tr>
+                    <td>Username:</td>
+                    <td th:text="${name}"></td>
+                </tr>
+                <tr>
+                    <td>Email:</td>
+                    <td th:text="${email}"></td>
+                </tr>
+                <tr>
+                    <td>Account type:</td>
+                    <td th:text="${accountType}"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <i class="fas fa-user-edit"></i>
+                        <a style="text-decoration-line: none" th:href="@{/user/edit}">Edit you details</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <i class="fas fa-user-slash"></i>
+                        <a style="text-decoration-line: none" th:href="@{/user/delete}">Delete your account</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-    <tr>
-        <td>
-            <a th:href="@{/user/delete}">Delete your account</a>
-        </td>
-    </tr>
-
-</table>
-<br/>
-
-<br/>
-<h2>Your tweets</h2>
-
-
-<table>
-    <thead>
-    <tr>
-        <td>Id</td>
-        <td>Content</td>
-        <td>Date added</td>
-    </tr>
-    </thead>
-    <tbody>
-
-    <tr th:each="tweet : ${userDetails.tweetList}">
-        <td th:text="${tweet.id}"></td>
-        <td th:text="${tweet.content}"></td>
-        <td th:text="${tweet.dateTweetAdded}"></td>
-        <td>
-            <a th:href="@{'/tweet/edit/'+${tweet.id}}">Edit tweet</a>
-        </td>
-        <td>
-            <a th:href="@{/tweet/delete(tweetId=${tweet.id})}">Delete</a>
-        </td>
-        <td>
-            <a th:href="@{/tweet/details(tweetId=${tweet.id})}">Details</a>
-        </td>
-    </tr>
-    </tbody>
-
-</table>
-
-<a th:href="@{/logout}">Log out</a>
-
+        <div class="col2">
+            <ul>
+                <li class="text-public-profile"><span th:text="${userDetails.username}"></span>'s profile.</li>
+                <li class="text-public-profile">Number of PituPits: <span th:text="${userTweets.size()}"></span></li>
+            </ul>
+            <ul  th:each="tweet : ${userTweets}">
+                <li class="col2-border">
+                    <a class="col2-user" style="text-decoration-line: blink" th:href="@{/user/details(username=${tweet.user.username})}" th:text="'@'+${tweet.user.username}">
+                    </a>
+                    <div class="col2-content" th:text="${tweet.content}"></div>
+                    <a class="col2-content-date" th:text="${#temporals.format(tweet.dateTweetAdded, 'dd-MM-yyyy HH:mm')}"></a>
+                    <i class="far fa-edit"></i><a class="col2-content-date" th:href="@{'/tweet/edit/'+${tweet.id}}">Edit</a>
+                    <i class="far fa-comment"></i><a class="col2-content-date" th:href="@{/comment/add(tweet_id=${tweet.id})}">Comment</a>
+                    <i class="far fa-question-circle"></i><a class="col2-content-date" th:href="@{/tweet/details(tweetId=${tweet.id})}">Details</a>
+                    <i class="far fa-trash-alt"></i><a class="col2-content-date" th:href="@{/tweet/delete(tweetId=${tweet.id})}">Delete</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col3"></div>
+    </div>
+</div>
 
 </body>
 </html>

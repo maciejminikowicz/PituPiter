@@ -24,23 +24,35 @@ public class CommentController {
     @Autowired
     private TweetService tweetService;
 
+//    @GetMapping("/add")
+//    public String getCommentForm(Model model, @RequestParam("tweet_id") Long tweetId) {
+//        Optional<Tweet> optionalTweet = tweetService.findById(tweetId);
+//        if (optionalTweet.isPresent()) {
+//            Tweet tweet = optionalTweet.get();
+//            String content = tweet.getContent();
+//            model.addAttribute("newComment", new Comment());
+//            model.addAttribute("tweetId", tweetId);
+//            model.addAttribute("tweetContent", content);
+//            return "comment-form";
+//        } else return "redirect:/";
+//    }
     @GetMapping("/add")
-    public String getCommentForm(Model model, @RequestParam("tweet_id") Long tweetId) {
+    public String commentAddForm(Model model, @RequestParam("tweet_id") Long tweetId){
         Optional<Tweet> optionalTweet = tweetService.findById(tweetId);
-        if (optionalTweet.isPresent()) {
+        if (optionalTweet.isPresent()){
             Tweet tweet = optionalTweet.get();
-            String content = tweet.getContent();
             model.addAttribute("newComment", new Comment());
-            model.addAttribute("tweetId", tweetId);
-            model.addAttribute("tweetContent", content);
+            model.addAttribute("tweet_Id", tweetId);
+            model.addAttribute("tweetContent", tweet.getContent());
             return "comment-form";
-        } else return "redirect:/";
+        }
+        else return "redirect:/user/home";
     }
 
     @PostMapping("/add")
     public String addComment(Comment comment, Long tweetId) {
         commentService.saveComment(comment, tweetId);
-        return "redirect:/tweet/details?tweetId=" + tweetId;
+        return "redirect:/user/home";
     }
 
     @GetMapping("/delete")
@@ -52,6 +64,19 @@ public class CommentController {
         }
         commentService.deleteComment(commentId);
         return "redirect:/tweet/details?tweetId=" + tweetId;
+    }
+
+    @GetMapping("/list")
+    public String getListOfTweetComments(Model model, @RequestParam Long tweetId){
+        Optional<Tweet> optionalTweet = tweetService.findById(tweetId);
+        if (optionalTweet.isPresent()){
+            Tweet tweet = optionalTweet.get();
+            model.addAttribute("tweetContent", tweet.getContent());
+            model.addAttribute("allComments", tweet.getCommentList());
+            return "comments";
+        }
+        else return "redirect:/error";
+
     }
 
 
